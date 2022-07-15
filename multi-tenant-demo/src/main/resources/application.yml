@@ -1,0 +1,36 @@
+server: ${port:8080}
+---
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  application:
+    name: multi-tenant-application
+
+tenant:
+  catalog:
+    datasource:
+      url: jdbc:mysql://localhost:3306/tenantcatalog2
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+
+  # HikariCP
+      hikari:
+        maximum-pool-size: 20
+        pool-name: Catalog-DataSource
+        max-lifetime: 1800000
+
+  datasource-cache:
+    maximumSize: 100
+    expireAfterAccess: 10
