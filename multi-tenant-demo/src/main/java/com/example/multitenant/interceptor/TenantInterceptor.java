@@ -25,6 +25,9 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // Implement logic to extract the Tenant Name here. Another way would be to
+        // parse a JWT and extract the Tenant Name from the Claims in the Token. In the
+        // example code we are just extracting a Header value:
         String tenantId = request.getHeader(X_TENANT_ID);
         if(null == tenantId) {
             response.getWriter().write("X-Tenant-Id not present in the Request Header");
