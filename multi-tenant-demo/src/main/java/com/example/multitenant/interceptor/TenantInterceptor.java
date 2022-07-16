@@ -1,5 +1,6 @@
 package com.example.multitenant.interceptor;
 
+import com.example.constants.Constants;
 import com.example.multitenant.TenantContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
@@ -19,18 +20,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 @Component
-public class RequestInterceptor implements HandlerInterceptor {
-
-    public static final String X_TENANT_ID = "X-Tenant-Id";
+public class TenantInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // Implement logic to extract the Tenant Name here. Another way would be to
         // parse a JWT and extract the Tenant Name from the Claims in the Token. In the
         // example code we are just extracting a Header value:
-        String tenantId = request.getHeader(X_TENANT_ID);
+        String tenantId = request.getHeader(Constants.X_TENANT_ID);
         if(null == tenantId) {
-            response.getWriter().write("X-Tenant-Id not present in the Request Header");
+            response.getWriter().write(Constants.X_TENANT_ID + " not present in the Request Header");
             response.setStatus(400);
             return false;
         }

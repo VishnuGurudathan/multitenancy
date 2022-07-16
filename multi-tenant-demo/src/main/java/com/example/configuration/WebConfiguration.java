@@ -1,6 +1,6 @@
 package com.example.configuration;
 
-import com.example.multitenant.interceptor.RequestInterceptor;
+import com.example.multitenant.interceptor.TenantInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -9,13 +9,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * @author vishnu.g
  */
-@Configuration
 @EnableWebMvc
+@Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
-    private final RequestInterceptor tenantRequestInterceptor;
+    private final TenantInterceptor tenantRequestInterceptor;
 
-    public WebConfiguration(RequestInterceptor tenantRequestInterceptor) {
+    public WebConfiguration(TenantInterceptor tenantRequestInterceptor) {
         this.tenantRequestInterceptor = tenantRequestInterceptor;
     }
 
